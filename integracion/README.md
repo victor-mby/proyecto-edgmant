@@ -12,3 +12,13 @@ Esta carpeta contiene un receptor local y un puente para navegador. No modifica 
 El receptor crea el esquema solo si falta, no elimina la base existente y escucha únicamente en `127.0.0.1:8765`. La sincronización inicial procesa las muestras que sigan en memoria y luego consulta novedades cada 1,5 segundos. La tabla de ingesta deduplica por motor, timestamp y tiempo de simulación.
 
 La primera versión captura telemetría de los 29 campos; no incorpora eventos ni alarmas y todavía no ejecuta inferencia automática ni actualiza el dashboard en vivo. Probarlo localmente sigue siendo necesario.
+
+## Pruebas automatizadas de la ingesta
+
+Desde la raíz del proyecto:
+
+```bash
+python -m unittest discover -s integracion/pruebas -v
+```
+
+Las pruebas cubren la inserción de los campos completos, la deduplicación de reintentos y el rechazo de muestras incompletas. Estas pruebas están añadidas al repositorio, pero aún deben ejecutarse en el equipo local para confirmar el resultado.
